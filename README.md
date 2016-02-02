@@ -1,4 +1,4 @@
-# Ember-weak
+# Ember-weak-ref
 
 WeakRef implementation for ember objects. Allowing a mixture of long-running
 and short running tasks to exist, without strongly retaining all parties.

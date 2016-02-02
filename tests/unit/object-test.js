@@ -1,6 +1,9 @@
 import { module, test } from 'qunit';
-import Mixin from 'ember-weak/mixin';
+
 import Object from 'ember-object';
+
+import Mixin from 'ember-weak-ref/mixin';
+
 import run from 'ember-runloop';
 import map from 'ember-weak/map';
 
@@ -51,7 +54,6 @@ test('basic scenario (invoke)', function(assert) {
   assert.equal(weak.get('state'), undefined);
 });
 
-
 test('basic scenario (release)', function(assert) {
   let obj = Object.extend(Mixin).create();
 
@@ -66,6 +68,7 @@ test('basic scenario (release)', function(assert) {
 
   weak.release();
   assert.deepEqual(map.get(obj), []);
+
 
   weak.set('foo', 2);
   assert.equal(weak.get('foo'), undefined);
