@@ -9,7 +9,7 @@ export default Component.extend({
     async save() {
       this.set('saving', true);
 
-      const component = this.weak('save');
+      const component = this.weak();
 
       try {
         let model = await this.model.save();
