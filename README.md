@@ -1,26 +1,34 @@
 # Ember-weak
 
-This README outlines the details of collaborating on this Ember addon.
+WeakRef implementation for ember objects. Allowing a mixture of long-running
+and short running tasks to exist, without strongly retaining all parties.
+
+```js
+export default Component.extend({
+  actions: {
+    async save() {
+      this.set('saving', true);
+
+      const component = this.weak('save');
+
+      try {
+        let model = await this.model.save();
+      } finally {
+        // ignore these operations, if
+        // * the this.weak('save') is invoked again, resulting in a new operation id
+        // * the component is destroyed
+        // * if the compnoent has been released
+        component.set('saving',  false);
+
+        component.release(); // platform provided versions, could do this automatically.
+      }
+    }
+  }
+})
+
+```
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+* `ember install ember-weak`
 
-## Running
-
-* `ember server`
-* Visit your app at http://localhost:4200.
-
-## Running Tests
-
-* `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
