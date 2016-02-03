@@ -21,6 +21,10 @@ export default class Cell {
     cells.splice(index, 1);
   }
 
+  get object() {
+    return this._obj;
+  }
+
   set(key, value) {
     return this._obj && set(this._obj, key, value);
   }

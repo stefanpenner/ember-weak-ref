@@ -15,6 +15,7 @@ test('basic scenario (get/set)', function(assert) {
   let weak = obj.weakRef();
 
   assert.equal(obj.get('foo'), undefined);
+  assert.equal(weak.object, obj);
 
   weak.set('foo', 1);
 
@@ -22,6 +23,8 @@ test('basic scenario (get/set)', function(assert) {
   assert.equal(weak.get('foo'), 1);
 
   run(obj, 'destroy');
+
+  assert.equal(weak.object, undefined);
 
   weak.set('foo', 2);
   assert.equal(weak.get('foo'), undefined);
@@ -41,6 +44,8 @@ test('basic scenario (invoke)', function(assert) {
 
   let weak = obj.weakRef();
 
+  assert.equal(weak.object, obj);
+
   assert.equal(obj.state, undefined);
 
   weak.invoke('updateState', 'hi');
@@ -49,6 +54,8 @@ test('basic scenario (invoke)', function(assert) {
   assert.equal(weak.get('state'), 'hi');
 
   run(obj, 'destroy');
+
+  assert.equal(weak.object, undefined);
 
   weak.invoke('updateState', 'foo');
   assert.equal(weak.get('state'), undefined);
@@ -59,6 +66,8 @@ test('basic scenario (release)', function(assert) {
 
   let weak = obj.weakRef();
 
+  assert.equal(weak.object, obj);
+
   assert.equal(obj.get('foo'), undefined);
 
   weak.set('foo', 1);
@@ -67,8 +76,9 @@ test('basic scenario (release)', function(assert) {
   assert.equal(weak.get('foo'), 1);
 
   weak.release();
-  assert.deepEqual(map.get(obj), []);
+  assert.equal(weak.object, undefined);
 
+  assert.deepEqual(map.get(obj), []);
 
   weak.set('foo', 2);
   assert.equal(weak.get('foo'), undefined);
@@ -82,6 +92,8 @@ test('basic scenario (get/set)', function(assert) {
   let obj = Object.extend(Mixin).create();
 
   let result = obj.weak(weak => {
+    assert.equal(weak.object, obj);
+
     assert.equal(obj.get('foo'), undefined);
 
     weak.set('foo', 1);
@@ -90,6 +102,8 @@ test('basic scenario (get/set)', function(assert) {
     assert.equal(weak.get('foo'), 1);
 
     run(obj, 'destroy');
+
+    assert.equal(weak.object, undefined);
 
     weak.set('foo', 2);
     assert.equal(weak.get('foo'), undefined);
@@ -113,6 +127,8 @@ test('basic scenario (invoke)', function(assert) {
   }).create();
 
   let result = obj.weak(weak => {
+    assert.equal(weak.object, obj);
+
     assert.equal(obj.state, undefined);
 
     weak.invoke('updateState', 'hi');
@@ -121,6 +137,8 @@ test('basic scenario (invoke)', function(assert) {
     assert.equal(weak.get('state'), 'hi');
 
     run(obj, 'destroy');
+
+    assert.equal(weak.object, undefined);
 
     weak.invoke('updateState', 'foo');
     assert.equal(weak.get('state'), undefined);
@@ -135,6 +153,8 @@ test('basic scenario (release)', function(assert) {
   let obj = Object.extend(Mixin).create();
 
   let result = obj.weak(weak => {
+    assert.equal(weak.object, obj);
+
     assert.equal(obj.get('foo'), undefined);
 
     weak.set('foo', 1);
@@ -143,8 +163,9 @@ test('basic scenario (release)', function(assert) {
     assert.equal(weak.get('foo'), 1);
 
     weak.release();
-    assert.deepEqual(map.get(obj), []);
 
+    assert.equal(weak.object, undefined);
+    assert.deepEqual(map.get(obj), []);
 
     weak.set('foo', 2);
     assert.equal(weak.get('foo'), undefined);
