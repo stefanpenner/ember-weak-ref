@@ -40,7 +40,7 @@ yields the WeakReference as its argument.
 ```js
 export default Component.extend({
   actions: {
-    async save() {
+    save() {
       this.set('saving', true);
 
       this.weak(async (component) => {
