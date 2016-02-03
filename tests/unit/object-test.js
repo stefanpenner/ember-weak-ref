@@ -3,9 +3,9 @@ import { module, test } from 'qunit';
 import Object from 'ember-object';
 
 import Mixin from 'ember-weak-ref/mixin';
+import map from 'ember-weak-ref/map';
 
 import run from 'ember-runloop';
-import map from 'ember-weak/map';
 
 module('WeakMixin');
 

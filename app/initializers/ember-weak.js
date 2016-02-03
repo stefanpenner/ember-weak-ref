@@ -1,1 +1,1 @@
-export { default, initialize } from 'ember-weak/initializers/ember-weak';
+export { default, initialize } from 'ember-weak-ref/initializers/ember-weak';
