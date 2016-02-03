@@ -1,4 +1,6 @@
 # Ember-weak-ref
+[![npm Version][npm-badge]][npm]
+[![Build Status][travis-badge]][travis]
 
 THIS PROJECT IS CURRENTLY EXPERIMENTAL.  PLEASE SUBMIT FEEDBACK.
 
@@ -65,3 +67,8 @@ export default Component.extend({
 })
 
 ```
+
+[npm]: https://www.npmjs.org/package/ember-weak-ref
+[npm-badge]: https://img.shields.io/npm/v/ember-weak-ref.svg?style=flat-square
+[travis]: https://travis-ci.org/stefanpenner/ember-weak-ref
+[travis-badge]: https://img.shields.io/travis/stefanpenner/ember-weak-ref/master.svg?style=flat-square
