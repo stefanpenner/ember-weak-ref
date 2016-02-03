@@ -25,6 +25,12 @@ someAsync(function() {
 
 ### more advanced example
 
+It is common, to want to create a weak reference to `this`, unfortunately this
+requires a second scope. To make this ease, `obj.weak(fn)` is provided, which
+yields the WeakReference as its argument.
+
+*note: be sure not to close over anything you don't want to retain (other weak refs are ok)*
+
 ```js
 export default Component.extend({
   actions: {
