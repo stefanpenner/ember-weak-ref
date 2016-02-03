@@ -3,6 +3,12 @@
 WeakRef implementation for ember objects. Allowing a mixture of long-running
 and short running tasks to exist, without strongly retaining all parties.
 
+## Installation
+
+* `ember install ember-weak-ref`
+
+## Examples
+
 *note: wil real ES6 proxies, the api becomes nicer*
 
 ### basic example
@@ -55,8 +61,3 @@ export default Component.extend({
 })
 
 ```
-
-## Installation
-
-* `ember install ember-weak`
-
