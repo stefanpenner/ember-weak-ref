@@ -9,7 +9,7 @@ and short running tasks to exist, without strongly retaining all parties.
 
 ## Examples
 
-*note: wil real ES6 proxies, the api becomes nicer*
+*note: with real ES6 proxies, the api becomes nicer*
 
 ### basic example
 
