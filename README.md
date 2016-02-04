@@ -15,7 +15,7 @@ and short running tasks to exist, without strongly retaining all parties.
 
 ## Examples
 
-*note: wil real ES6 proxies, the api becomes nicer*
+*note: with real ES6 proxies, the api becomes nicer*
 
 ### basic example
 
@@ -38,8 +38,7 @@ someAsync(function() {
 ### more advanced example
 
 It is common, to want to create a weak reference to `this`, unfortunately this
-requires a second scope. To make this ease, `obj.weak(fn)` is provided, which
-yields the WeakReference as its argument.
+requires a second scope. To make this easier, `obj.weak(fn)` yields the WeakReference as its argument.
 
 *note: be sure not to close over anything you don't want to retain (other weak refs are ok)*
 
