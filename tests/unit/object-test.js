@@ -11,23 +11,28 @@ module('WeakMixin#weakRef');
 
 test('basic scenario (get/set)', function(assert) {
   let obj = Object.extend(Mixin).create();
-
   let weak = obj.weakRef();
 
   assert.equal(obj.get('foo'), undefined);
   assert.equal(weak.object, obj);
 
   weak.set('foo', 1);
+  weak.setProperties({ bar: 3, baz: 4 });
 
   assert.equal(obj.get('foo'), 1);
+  assert.deepEqual(obj.getProperties('bar', 'baz'), { bar: 3, baz: 4 });
   assert.equal(weak.get('foo'), 1);
+  assert.deepEqual(weak.getProperties('bar', 'baz'), { bar: 3, baz: 4 });
 
   run(obj, 'destroy');
 
   assert.equal(weak.object, undefined);
 
+  weak.setProperties({ bar: 5, baz: 6 });
   weak.set('foo', 2);
+
   assert.equal(weak.get('foo'), undefined);
+  assert.equal(weak.getProperties('bar', 'baz'), undefined);
 });
 
 test('basic scenario (invoke)', function(assert) {
@@ -175,4 +180,3 @@ test('basic scenario (release)', function(assert) {
 
   assert.equal(result, 3);
 });
-
