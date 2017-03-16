@@ -1,10 +1,15 @@
 import cellMap from './map';
 import Cell from './cell';
 import Mixin from 'ember-metal/mixin';
+import Ember from 'ember';
+
+const { Promise } = Ember.RSVP;
 
 export default Mixin.create({
   weak(callback) {
-    return callback(this.weakRef());
+    let ref = this.weakRef();
+    return new Promise(resolve => resolve(callback(ref))).
+               finally(() => ref.release());
   },
 
   weakRef() {

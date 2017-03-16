@@ -6,6 +6,9 @@ import Mixin from 'ember-weak-ref/mixin';
 import map from 'ember-weak-ref/map';
 
 import run from 'ember-runloop';
+import Ember from 'ember';
+
+const { Promise } = Ember.RSVP;
 
 module('WeakMixin#weakRef');
 
@@ -92,7 +95,6 @@ test('basic scenario (release)', function(assert) {
 
 module('WeakMixin#weak');
 
-
 test('basic scenario (get/set)', function(assert) {
   let obj = Object.extend(Mixin).create();
 
@@ -113,10 +115,10 @@ test('basic scenario (get/set)', function(assert) {
     weak.set('foo', 2);
     assert.equal(weak.get('foo'), undefined);
 
-    return 1;
+    return Promise.resolve(1);
   });
 
-  assert.equal(result, 1);
+  return result.then(result => assert.equal(result, 1));
 });
 
 test('basic scenario (invoke)', function(assert) {
@@ -148,10 +150,10 @@ test('basic scenario (invoke)', function(assert) {
     weak.invoke('updateState', 'foo');
     assert.equal(weak.get('state'), undefined);
 
-    return 2;
+    return Promise.resolve(2);
   });
 
-  assert.equal(result, 2);
+  return result.then(result => assert.equal(result, 2));
 });
 
 test('basic scenario (release)', function(assert) {
@@ -175,8 +177,9 @@ test('basic scenario (release)', function(assert) {
     weak.set('foo', 2);
     assert.equal(weak.get('foo'), undefined);
     assert.equal(obj.get('foo'), 1);
-    return 3;
+
+    return Promise.resolve(3);
   });
 
-  assert.equal(result, 3);
+  return result.then(result => assert.equal(result, 3));
 });
