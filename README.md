@@ -57,8 +57,6 @@ export default Component.extend({
           // * the component is destroyed
           // * if the compnoent has been released
           component.set('saving',  false);
-
-          component.release(); // platform provided versions, could do this automatically.
         }
       });
     }
